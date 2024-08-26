@@ -1,0 +1,29 @@
+steps:
+# Step 1: Build the frontend
+- name: 'gcr.io/cloud-builders/npm'
+  dir: 'frontend'
+  args: ['install']
+
+- name: 'gcr.io/cloud-builders/npm'
+  dir: 'frontend'
+  args: ['run', 'build']
+
+# Step 2: Build backend services
+- name: 'gcr.io/cloud-builders/docker'
+  dir: 'backend1'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/backend1', '.']
+
+- name: 'gcr.io/cloud-builders/docker'
+  dir: 'backend2'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/backend2', '.']
+
+# Step 3: Push backend images to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/backend1']
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/backend2']
+
+# Step 4: Deploy to your GCP VMs (can be done using a script or gcloud commands)
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['compute', 'ssh', 'your-vm', '--command', './deploy.sh']
