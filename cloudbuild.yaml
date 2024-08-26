@@ -1,29 +1,19 @@
-steps:
-# Step 1: Build the frontend
-- name: 'gcr.io/cloud-builders/npm'
-  dir: 'frontend'
-  args: ['install']
-
-- name: 'gcr.io/cloud-builders/npm'
-  dir: 'frontend'
-  args: ['run', 'build']
-
-# Step 2: Build backend services
-- name: 'gcr.io/cloud-builders/docker'
-  dir: 'backend1'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/backend1', '.']
-
-- name: 'gcr.io/cloud-builders/docker'
-  dir: 'backend2'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/backend2', '.']
-
-# Step 3: Push backend images to Container Registry
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/$PROJECT_ID/backend1']
-
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/$PROJECT_ID/backend2']
-
-# Step 4: Deploy to your GCP VMs (can be done using a script or gcloud commands)
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: ['compute', 'ssh', 'your-vm', '--command', './deploy.sh']
+# Step 1: Checkout the code from the repository
+- name: 'gcr.io/cloud-builders/git'
+  entrypoint: 'bash'
+  args: ['-c', 'git clone https://github.com/AttulKumar/Full-stack-app-with-CICD-/edit/main/cloudbuild.yaml'
+  ]
+# Step 2: Install Node.js dependencies
+- name: 'node:14'  # Use the appropriate Node.js version
+  entrypoint: 'bash'
+  args: ['-c', 'npm install']
+  
+# Step 3: Run tests (optional)
+- name: 'node:14'
+  entrypoint: 'bash'
+  args: ['-c', 'npm test']
+  
+# Step 4: Build the project
+#- name: 'node:14'
+#  entrypoint: 'bash'
+#  args: ['-c', 'npm run build']
