@@ -6,13 +6,6 @@ steps:
       - '-c'
       - 'git clone https://github.com/AttulKumar/Full-stack-app-with-CICD-'
   
-  # Step 2: Update package list and install nginx on the VM
-  - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        gcloud compute ssh web-server-react --zone us-central1-a	 --command "sudo apt update"
 
 
   # Step 2: SSH into the VM and download the index.js file from GitHub
@@ -22,15 +15,21 @@ steps:
       - '-c'
       - |
         gcloud compute ssh backend01 --zone us-central1-f --command "
-          # Install curl if not installed
-          sudo apt update &&
-          sudo apt install -y curl &&
-          
+          # Navigate to the project directory
+          cd /home/atulbusiness792_gmail_com/my-app &&
+
           # Download the index.js file from GitHub
           curl -o /home/atulbusiness792_gmail_com/my-app/index.js https://raw.githubusercontent.com/AttulKumar/Full-stack-app-with-CICD-/main/backend01/index.js
+        
+          # Initialize npm project if not already done
+          if [ ! -f package.json ]; then
+            npm init -y
+          fi &&
           
-          
+          # Run the Node.js application
+          node index.js
         "
+
       
 
 options:
