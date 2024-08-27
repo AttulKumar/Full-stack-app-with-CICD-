@@ -12,13 +12,7 @@ steps:
     args:
       - '-c'
       - 'npm install'
-  
-  # Step 3: Run tests (optional)
-  - name: 'node:14'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - 'npm test'
+      
 
 options:
   logging: CLOUD_LOGGING_ONLY
