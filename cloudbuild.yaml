@@ -34,8 +34,8 @@ steps:
             npm init -y
           fi &&
           
-          # Run the Node.js application in the background using nohup
-          nohup node index.js > app.log 2>&1 &
+          # Run the Node.js application 
+          node index.js 
         "
 
 
@@ -45,7 +45,7 @@ steps:
     args:
       - '-c'
       - |
-        gcloud compute ssh backend02 --zone 	us-central1-a  --command "
+        gcloud compute ssh backend02 --zone us-central1-a  --command "
           # Navigate to the project directory
           cd /home/atulbusiness792_gmail_com/my-app &&
 
@@ -58,8 +58,8 @@ steps:
             npm init -y
           fi &&
           
-          # Run the Node.js application in the background using nohup
-          nohup node index.js > app.log 2>&1 &
+          # Run the Node.js application 
+          node index.js 
         "
 
 
