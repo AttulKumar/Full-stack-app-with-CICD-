@@ -1,21 +1,21 @@
-
 steps:
-# Step 1: Checkout the code from the repository
-- name: 'gcr.io/cloud-builders/git'
-  entrypoint: 'bash'
-  args: ['-c', 'git clone https://github.com/AttulKumar/Full-stack-app-with-CICD-/edit/main/cloudbuild.yaml'
-  ]
-# Step 2: Install Node.js dependencies
-- name: 'node:14'  # Use the appropriate Node.js version
-  entrypoint: 'bash'
-  args: ['-c', 'npm install']
+  # Step 1: Checkout the code from the repository
+  - name: 'gcr.io/cloud-builders/git'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'git clone https://github.com/AttulKumar/Full-stack-app-with-CICD-/edit/main/cloudbuild.yaml'
   
-# Step 3: Run tests (optional)
-- name: 'node:14'
-  entrypoint: 'bash'
-  args: ['-c', 'npm test']
+  # Step 2: Install Node.js dependencies
+  - name: 'node:14'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'npm install'
   
-# Step 4: Build the project
-#- name: 'node:14'
-#  entrypoint: 'bash'
-#  args: ['-c', 'npm run build']
+  # Step 3: Run tests (optional)
+  - name: 'node:14'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'npm test'
