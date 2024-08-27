@@ -6,12 +6,13 @@ steps:
       - '-c'
       - 'git clone https://github.com/AttulKumar/Full-stack-app-with-CICD-'
   
-  # Step 2: Install Node.js dependencies
-  - name: 'node:14'
+  # Step 2: Update package list and install nginx on the VM
+  - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'npm install'
+      - |
+        gcloud compute ssh web-server-react --zone us-central1-a	 --command "sudo apt update && sudo apt install -y nginx"
       
 
 options:
