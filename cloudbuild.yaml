@@ -19,3 +19,6 @@ steps:
     args:
       - '-c'
       - 'npm test'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
