@@ -19,7 +19,7 @@ steps:
           cd /home/atulbusiness792_gmail_com/my-app &&
 
           # Download the index.js file from GitHub
-          curl -o /home/atulbusiness792_gmail_com/my-app/index.js https://raw.githubusercontent.com/AttulKumar/Full-stack-app-with-CICD-/main/backend01/index.js
+          sudo curl -o /home/atulbusiness792_gmail_com/my-app/index.js https://raw.githubusercontent.com/AttulKumar/Full-stack-app-with-CICD-/main/backend01/index.js
         
           # Initialize npm project if not already done
           if [ ! -f package.json ]; then
@@ -27,7 +27,8 @@ steps:
           fi &&
           
           # Run the Node.js application
-          node index.js
+          
+          # node index.js
         "
 
       
