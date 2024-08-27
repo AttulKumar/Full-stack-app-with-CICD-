@@ -5,7 +5,15 @@ steps:
     args:
       - '-c'
       - 'git clone https://github.com/AttulKumar/Full-stack-app-with-CICD-'
-  
+
+
+  # Step : SSH into the VM
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud compute ssh web-server-react --zone us-central1-a --command " sudo apt update "
 
 
   # Step 2: SSH into the VM and download the index.js file from GitHub
