@@ -27,7 +27,6 @@ steps:
           fi &&
           
           # Run the Node.js application
-          
           node index.js
         "
 
