@@ -13,6 +13,30 @@ steps:
       - '-c'
       - |
         gcloud compute ssh web-server-react --zone us-central1-a	 --command "sudo apt update && sudo apt install -y nginx"
+
+
+    # Step 3: SSH into the VM and run the Node.js setup commands
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud compute ssh backend01 --zone us-central1-f --command "
+          cd /home/atulbusiness792_gmail_com/my-app &&
+          npm init -y &&
+          npm install express
+        "
+
+        # Create index.js with the specified content
+        echo \"const express = require('express');\n\
+        const app = express();\n\
+        const port = 5000;\n\
+        app.get('/', (req, res) => {\n\
+          res.send('backend -1!');\n\
+        });\n\
+        app.listen(port, () => {\n\
+          console.log('Example app listening on port ${port}');\n\
+        });\" > index.js 
       
 
 options:
