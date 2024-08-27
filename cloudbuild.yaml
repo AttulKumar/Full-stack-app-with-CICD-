@@ -15,25 +15,21 @@ steps:
         gcloud compute ssh web-server-react --zone us-central1-a	 --command "sudo apt update"
 
 
-    # Step 3: SSH into the VM and run the Node.js setup commands
+  # Step 2: SSH into the VM and download the index.js file from GitHub
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
         gcloud compute ssh backend01 --zone us-central1-f --command "
-          cd /home/atulbusiness792_gmail_com/my-app &&
-          npm init -y &&
-          echo \"const express = require('express');\n\
-          const app = express();\n\
-          const port = 5000;\n\
-          app.get('/', (req, res) => {\n\
-            res.send('backend -1!');\n\
-          });\n\
-          app.listen(port, () => {\n\
-            console.log('Example app listening on port ${port}');\n\
-          });\" > index.js &&
-          node index.js
+          # Install curl if not installed
+          sudo apt update &&
+          sudo apt install -y curl &&
+          
+          # Download the index.js file from GitHub
+          curl -o /home/atulbusiness792_gmail_com/my-app/index.js https://raw.githubusercontent.com/AttulKumar/Full-stack-app-with-CICD-/main/backend01/index.js
+          
+          
         "
       
 
