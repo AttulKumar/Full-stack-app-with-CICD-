@@ -1,3 +1,5 @@
+
+steps:
 # Step 1: Checkout the code from the repository
 - name: 'gcr.io/cloud-builders/git'
   entrypoint: 'bash'
