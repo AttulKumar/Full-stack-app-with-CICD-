@@ -4,7 +4,7 @@ steps:
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'git clone https://github.com/AttulKumar/Full-stack-app-with-CICD-/edit/main/cloudbuild.yaml'
+      - 'git clone https://github.com/AttulKumar/Full-stack-app-with-CICD-/tree/main'
   
   # Step 2: Install Node.js dependencies
   - name: 'node:14'
