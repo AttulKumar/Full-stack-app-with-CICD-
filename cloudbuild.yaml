@@ -30,7 +30,30 @@ steps:
           # node index.js
         "
 
-      
+
+# Step 3: SSH into the VM and download the index.js file from GitHub
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud compute ssh backend02 --zone 	us-central1-a  --command "
+          # Navigate to the project directory
+          cd /home/atulbusiness792_gmail_com/my-app &&
+
+
+          # Download the index.js file from GitHub
+          sudo curl -o /home/atulbusiness792_gmail_com/my-app/index.js https://raw.githubusercontent.com/AttulKumar/Full-stack-app-with-CICD-/main/backend02/index.js
+        
+          # Initialize npm project if not already done
+          if [ ! -f package.json ]; then
+            npm init -y
+          fi 
+          
+          # Run the Node.js application
+          # node index.js
+        "
+
 
 options:
   logging: CLOUD_LOGGING_ONLY
